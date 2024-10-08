@@ -9,7 +9,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import { updateDirection } from "../redux/character/actions";
 
 // Styling for MaterialUI Components
 const useStyles = makeStyles((theme) =>
@@ -27,36 +26,10 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function PreviewArea({ character, add_character, set_active, update_direction  }) {
+function PreviewArea({ character, add_character, set_active  }) {
   const classes = useStyles();
   const [active, setActive] = useState(character.active);
-  function detectCollision(char1, char2) {
-    const rect1 = document.getElementById(char1.id).getBoundingClientRect();
-    const rect2 = document.getElementById(char2.id).getBoundingClientRect();
-  
-    return !(
-      rect1.right < rect2.left ||
-      rect1.left > rect2.right ||
-      rect1.bottom < rect2.top ||
-      rect1.top > rect2.bottom
-    );
-  }
-  useEffect(() => {
-    const handleCollision = () => {
-      character.characters.forEach((char1, index1) => {
-        character.characters.forEach((char2, index2) => {
-          console.log('Here1')
-          if (index1 !== index2 && detectCollision(char1, char2)) {
-            alert('Collided')
-            // Change direction of both characters
-            // update_direction(char1.id, -1); // Invert direction for char1
-            // update_direction(char2.id, -1); // Invert direction for char2
-          }
-        });
-      });
-    };
-    handleCollision();
-  }, []);
+
   var pos1 = 0,
     pos2 = 0,
     pos3 = 0,
